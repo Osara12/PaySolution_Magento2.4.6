@@ -3,6 +3,9 @@
 namespace PaySolutions\Base\Controller\Callback;
 
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\Request\InvalidRequestException;
+use Magento\Framework\App\RequestInterface;
 
 class Postback extends \Magento\Framework\App\Action\Action {
 
@@ -38,6 +41,16 @@ class Postback extends \Magento\Framework\App\Action\Action {
         return parent::__construct($context);
         $this->_scopeConfig = $context->getScopeConfig();
         
+    }
+
+    public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
+    {
+        return null;
+    }
+
+    public function validateForCsrf(RequestInterface $request): ?bool
+    {
+        return true;
     }
 
     // Use this method to get ID    

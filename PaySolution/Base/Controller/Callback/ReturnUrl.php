@@ -4,7 +4,7 @@ namespace PaySolutions\Base\Controller\Callback;
 
 use Magento\Framework\App\ResponseInterface;
 
-class Return extends \Magento\Framework\App\Action\Action {
+class ReturnUrl extends \Magento\Framework\App\Action\Action {
 
     protected $_checkoutSession;
     protected $_orderFactory;

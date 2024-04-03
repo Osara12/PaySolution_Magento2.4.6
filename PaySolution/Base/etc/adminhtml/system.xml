@@ -56,7 +56,7 @@
                         </depends>
                     </field>
 
-                    <field id="postbackurl " translate="label" type="text" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <field id="postbackurl" translate="label" type="text" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="1">
                         <frontend_model>PaySolutions\Base\Block\System\PostbackUrl</frontend_model>
                         <label>Return URL webhook</label>
                         <depends>

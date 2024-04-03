@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="Paysolution">
+                <group id="payso_payment" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>PaySolutions Payment Gateway</label>
+                    <fieldset_css>payso-section</fieldset_css>
+                    <frontend_model>PaySolutions\Base\Block\Adminhtml\System\Config\Fieldset\PaySoPayment</frontend_model>
+                    <attribute type="displayIn">recommended_solutions</attribute>
+
+                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Title</label>
+                        <config_path>payment/payso_payment/title</config_path>
+                    </field>  
+
+                    <field id="order_status" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="25" translate="label" type="select">
+                        <label>New Order Status</label>
+                        <source_model>Magento\Sales\Model\Config\Source\Order\Status\NewStatus</source_model>
+                        <config_path>payment/payso_payment/order_status</config_path>
+                    </field>
+
+                    <field id="merchant_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Merchant ID</label>
+                        <config_path>payment/payso_payment/merchant_id</config_path>
+                    </field>
+                    <field id="store_code" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Store Code</label>
+                        <config_path>payment/payso_payment/store_code</config_path>
+                    </field>
+                    <!--
+                    <field id="lang" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Language</label>
+                        <source_model>PaySolutions\Base\Model\Config\Language</source_model>
+                        <config_path>payment/payso_payment/lang</config_path>
+                    </field>
+                    -->
+                    <!--
+                    <field id="cc" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Currency</label>
+                        <source_model>PaySolutions\Base\Model\Config\Currency</source_model>
+                        <config_path>payment/payso_payment/cc</config_path>
+                    </field>
+                    -->
+                    <field id="returnurl" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <frontend_model>PaySolutions\Base\Block\System\ReturnUrl</frontend_model>
+                        <label>Return url</label>
+                        <depends>
+                            <field id="is_enabled">1</field>
+                        </depends>
+                    </field>
+
+                    <field id="postbackurl " translate="label" type="text" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <frontend_model>PaySolutions\Base\Block\System\PostbackUrl</frontend_model>
+                        <label>Return URL webhook</label>
+                        <depends>
+                            <field id="is_enabled">1</field>
+                        </depends>
+                    </field>
+                              
+               </group>
+            </group>
+        </section>
+    </system>
+</config>

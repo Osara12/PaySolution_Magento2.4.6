@@ -9,7 +9,7 @@
     <system>
         <section id="payment">
             <group id="paysolution">
-                <group id="payso_payment" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <group id="payso_payment" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>PaySolutions Payment Gateway</label>
                     <fieldset_css>payso-section</fieldset_css>
                     <frontend_model>PaySolutions\Base\Block\Adminhtml\System\Config\Fieldset\Payment</frontend_model>

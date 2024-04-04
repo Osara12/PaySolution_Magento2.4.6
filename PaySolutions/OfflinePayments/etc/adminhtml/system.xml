@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="payment">
-            <section id="payso_payment">
+            <group id="payso_payment">
         
 
                 <group id="custompayment" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">

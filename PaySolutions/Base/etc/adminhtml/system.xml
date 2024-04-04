@@ -8,7 +8,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../Config/etc/system_file.xsd">
     <system>
         <section id="payment">
-            <group id="paysolution" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">> 
+            <group id="paysolution" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
 
                     <label>PaySolutions Payment Gateway</label>
                     <fieldset_css>payso-section</fieldset_css>

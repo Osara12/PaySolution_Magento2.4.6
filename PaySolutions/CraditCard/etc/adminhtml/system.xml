@@ -10,32 +10,30 @@
         <section id="payment">
             <group id="paysolution">
                 <group id="payso_payment">
-                    <group id="payso_payment">
 
-                        <group id="payso_card" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Cradit Card</label>
-                            <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                                <label>Enabled</label>
-                                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                                <config_path>payment/payso_card/active</config_path>
-                            </field>
-                            <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                                <label>Title</label>
-                                <config_path>payment/payso_card/title</config_path>
-                            </field>
-                            <field id="min_order_total" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="0">
-                                <label>Minimum Order Total</label>
-                                <validate>validate-number validate-zero-or-greater</validate>
-                                <config_path>payment/payso_card/min_order_total</config_path>
-                            </field>
-                            <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
-                                <label>Sort Order</label>
-                                <frontend_class>validate-number</frontend_class>
-                                <config_path>payment/payso_card/sort_order</config_path>
-                            </field>
-                        </group>
-
+                    <group id="payso_card" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Cradit Card</label>
+                        <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/payso_card/active</config_path>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Title</label>
+                            <config_path>payment/payso_card/title</config_path>
+                        </field>
+                        <field id="min_order_total" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Minimum Order Total</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <config_path>payment/payso_card/min_order_total</config_path>
+                        </field>
+                        <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Sort Order</label>
+                            <frontend_class>validate-number</frontend_class>
+                            <config_path>payment/payso_card/sort_order</config_path>
+                        </field>
                     </group>
+                              
                </group>
             </group>
         </section>

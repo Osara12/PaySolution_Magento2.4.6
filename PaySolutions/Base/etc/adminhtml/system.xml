@@ -49,7 +49,7 @@
                     </field>
                     -->
                     <field id="returnurl" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <frontend_model>PaySolutions\Base\Block\System\ReturnUrl</frontend_model>
+                        <frontend_model>PaySolutions\Base\Block\Adminhtml\System\ReturnUrl</frontend_model>
                         <label>Return url</label>
                         <depends>
                             <field id="is_enabled">1</field>

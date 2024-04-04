@@ -1,10 +1,10 @@
 <?php
 namespace PaySolutions\Base\Block\Adminhtml\System\Config\Fieldset;
 
-/** 
- * Fieldset renderer for PaySolution Payment Gateway
+/**
+ * Fieldset renderer for Omise solution
  */
-class PaySoPayment extends \Magento\Config\Block\System\Config\Form\Fieldset
+class Payment extends \Magento\Config\Block\System\Config\Form\Fieldset
 {
     /**
      * Add custom css class
@@ -33,7 +33,9 @@ class PaySoPayment extends \Magento\Config\Block\System\Config\Form\Fieldset
                     <button type="button"
                             class="button action-configure"
                             id="' . $htmlId . '-head"
-                            onclick="psButtonToggle.call(this, \'' . $htmlId . "', '" . $this->getUrl('adminhtml/*/state') . '\'); return false;">
+                            onclick="omiseButtonToggle.call(
+                                this, \'' . $htmlId . "', '" . $this->getUrl('adminhtml/*/state') . '\'
+                            ); return false;">
                         <span class="state-closed">' . __('Configure') . '</span>
                         <span class="state-opened">' . __('Close') . '</span>
                     </button>
@@ -41,7 +43,7 @@ class PaySoPayment extends \Magento\Config\Block\System\Config\Form\Fieldset
                 <div class="heading">
                     <strong>' . $element->getLegend() . '</strong>
                     <span class="heading-intro">' .
-                        __('Can reach your customers all over the world. Through the many payment channels, both online and offline are available to serve you. v2.0') . '<br/>
+                    __('Can reach your customers all over the world. Through the many payment channels, both online and offline are available to serve you. v2.0.0') . '<br/>
                     </span>
                     <div class="config-alt"></div>
                 </div>
@@ -55,7 +57,7 @@ class PaySoPayment extends \Magento\Config\Block\System\Config\Form\Fieldset
     protected function _getExtraJs($element)
     {
         $script = "require(['jquery', 'prototype'], function(jQuery){
-            window.psButtonToggle = function (id, url) {
+            window.omiseButtonToggle = function (id, url) {
                 var doScroll = false;
                 Fieldset.toggleCollapse(id, url);
                 if ($(this).hasClassName(\"open\")) {

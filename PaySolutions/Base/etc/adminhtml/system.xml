@@ -12,7 +12,7 @@
                 <group id="payso_payment" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>PaySolutions Payment Gateway</label>
                     <fieldset_css>payso-section</fieldset_css>
-                    <frontend_model>PaySolutions\Base\Block\Adminhtml\System\Config\Fieldset\PaySoPayment</frontend_model>
+                    <frontend_model>PaySolutions\Base\Block\Adminhtml\System\Config\Fieldset\Payment</frontend_model>
                     <attribute type="displayIn">recommended_solutions</attribute>
 
                     <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">

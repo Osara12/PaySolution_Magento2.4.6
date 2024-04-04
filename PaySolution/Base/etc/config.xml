@@ -11,16 +11,21 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
     <default>
+        <csp>
+            <mode>
+                <storefront>
+                    <report_only>1</report_only>
+                </storefront>
+                <admin>
+                    <report_only>1</report_only>
+                </admin>
+            </mode>
+        </csp>
         <payment>
-            <kbankonlinepayment>
-                <production_status>0</production_status> 
-                  <api_url_sandbox>https://dev-kpaymentgateway-services.kasikornbank.com</api_url_sandbox>  
-                  <api_url_js_sandbox>https://dev-kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js</api_url_js_sandbox>    
-                  <api_url_production>https://kpaymentgateway-services.kasikornbank.com</api_url_production>    
-                  <api_url_js_production>https://kpaymentgateway.kasikornbank.com/ui/v2/kpayment.min.js</api_url_js_production>    
-                <model>PaySolutions\KbankOnlinePayment\Model\KbankOnlinePayment</model>
+            <payso_payment>
+                <model>PaySolutions\KbankOnlinePayment\Model\Payment\PaysoPayment</model>
                 <group>offline</group>
-            </kbankonlinepayment>
+            </payso_payment>
             <!-- payment-config -->
 
         </payment>

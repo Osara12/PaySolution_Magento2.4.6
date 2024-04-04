@@ -11,7 +11,7 @@
             <group id="paysolution">
                 <group id="payso_payment">
 
-                    <group id="payso_card" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <group id="payso_card" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Cradit Card</label>
                         <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                             <label>Enabled</label>

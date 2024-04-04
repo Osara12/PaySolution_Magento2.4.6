@@ -23,8 +23,10 @@
         </csp>
         <payment>
             <payso_payment>
-                <model>PaySolutions\CraditCard\Model\Payment\PaysoPayment</model>
-                <group>offline</group>
+                <payso_card>
+                    <model>PaySolutions\CraditCard\Model\Payment\PaysoPayment</model>
+                    <group>offline</group>
+                </payso_card>
             </payso_payment>
             <!-- payment-config -->
 

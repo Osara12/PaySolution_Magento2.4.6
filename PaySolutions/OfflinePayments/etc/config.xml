@@ -6,9 +6,8 @@
             <custompayment>
                 <active>1</active>
                 <model>PaySolutions\OfflinePayments\Model\Gateways\CustomPayment</model>
-                <order_status>pending</order_status>
-                <title>Custom Payment</title>
-                <allowspecific>0</allowspecific>
+                <title>Cradit Card</title>
+                <min_order_total>0</min_order_total>
                 <group>offline</group>
             </custompayment>
         </payment>

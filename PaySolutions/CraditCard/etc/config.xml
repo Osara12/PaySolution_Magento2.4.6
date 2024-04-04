@@ -22,12 +22,12 @@
             </mode>
         </csp>
         <payment>
-            <payso_payment>
-                <payso_card>
-                    <model>PaySolutions\CraditCard\Model\Payment\PaysoPayment</model>
-                    <group>offline</group>
-                </payso_card>
-            </payso_payment>
+            <payso_card>
+                <active>1</active>
+                <title>Credit Card</title>
+                <model>PaySolutions\CraditCard\Model\Payment\PaysoPayment</model>
+                <group>offline</group>
+            </payso_card>
             <!-- payment-config -->
 
         </payment>

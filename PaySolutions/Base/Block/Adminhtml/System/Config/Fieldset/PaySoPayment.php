@@ -1,5 +1,5 @@
 <?php
-namespace PaySolutions\PsPayments\Block\Adminhtml\System\Config\Fieldset;
+namespace PaySolutions\Base\Block\Adminhtml\System\Config\Fieldset;
 
 /** 
  * Fieldset renderer for PaySolution Payment Gateway

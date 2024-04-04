@@ -1,6 +1,6 @@
 <?php
 
-namespace PaySolutions\Base\Adminhtml\Block\System;
+namespace PaySolutions\Base\Block\Adminhtml\System\;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field as FormField;

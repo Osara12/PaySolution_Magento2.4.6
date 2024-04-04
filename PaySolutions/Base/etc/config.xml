@@ -23,7 +23,7 @@
         </csp>
         <payment>
             <payso_payment>
-                <model>PaySolutions\KbankOnlinePayment\Model\Payment\PaysoPayment</model>
+                <model>PaySolutions\Base\Model\Payment\PaysoPayment</model>
                 <group>offline</group>
             </payso_payment>
             <!-- payment-config -->

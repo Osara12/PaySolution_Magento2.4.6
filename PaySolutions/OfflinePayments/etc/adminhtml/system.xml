@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="custompayment" translate="label" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Custom Payment Option</label>
+                <field id="title" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="active" translate="label comment" sortOrder="2" type="select" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="store_views" translate="label" sortOrder="3" type="multiselect" showInDefault="1"
+                       showInStore="1" showInWebsite="1">
+                    <label>Enabled for store views</label>
+                    <source_model>PaySolutions\OfflinePayments\Model\Config\Source\StoreViews</source_model>
+                </field>
+                <field id="sort_order" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sort Order</label>
+                    <frontend_class>validate-number</frontend_class>
+                </field>
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Payment from Applicable Countries</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Payment from Specific Countries</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

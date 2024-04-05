@@ -81,7 +81,8 @@ class Request extends \Magento\Framework\App\Action\Action
             return $redirect;
         }
         $refno = $orderId;
-        $amount = (int)$order->getGrandTotal()*100; //(int) 1234.56 Bath
+        $grandTotal = $order->getGrandTotal(); //1234.5600
+        $amount = number_format((float)$grandTotal, 2, '.', ''); //1234.56
         $product = $order->getAllItems();
         foreach ($product as $item) {
             $itemNo = $item->getId();

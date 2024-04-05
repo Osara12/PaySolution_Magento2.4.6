@@ -3,7 +3,7 @@ define(
         'Magento_Checkout/js/view/payment/default',
         'PaySolutions_CraditCard/js/action/set-payment-method-action'
     ],
-    function (Component) {
+    function (Component, setPaymentMethodAction) {
         'use strict';
         return Component.extend({
             defaults: {
@@ -14,9 +14,7 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
             afterPlaceOrder: function () {
-                url.setBaseUrl(BASE_URL);
-                var link = url.build('shopeepay/jumpapp/request');
-                $.mage.redirect(link); //redirect to Request page after place order
+                setPaymentMethodAction(this.messageContainer);
                 return false;
             },
         });

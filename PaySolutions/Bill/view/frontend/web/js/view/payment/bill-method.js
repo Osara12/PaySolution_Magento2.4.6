@@ -8,8 +8,8 @@ define(
     'use strict';
     rendererList.push(
       {
-        type: 'payso_card',
-        component: 'PaySolutions_CraditCard/js/view/payment/method-renderer/payso-card'
+        type: 'payso_bill',
+        component: 'PaySolutions_Bill/js/view/payment/method-renderer/payso-bill'
       }
     );
     return Component.extend({});

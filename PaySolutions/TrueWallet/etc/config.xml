@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ *
+ * เซ็ตค่า Default ลงฟอร์มในหน้าตั้งค่า
+ * Layout มาจาก adminhtml/system.xml
+ *
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <csp>
+            <mode>
+                <storefront>
+                    <report_only>1</report_only>
+                </storefront>
+                <admin>
+                    <report_only>1</report_only>
+                </admin>
+            </mode>
+        </csp>
+        <payment>
+            <payso_truewallet>
+                <model>PaySolutions\TrueWallet\Model\Payment\PaysoPayment</model>
+                <active>1</active> 
+                <title>True Money Wallet</title>
+                <min_order_total>0</min_order_total>
+                <sort_order>70</sort_order>
+                <group>offline</group>
+            </payso_truewallet>
+            <!-- payment-config -->
+
+        </payment>
+    </default>
+</config>

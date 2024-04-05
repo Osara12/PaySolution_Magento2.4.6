@@ -8,8 +8,8 @@ define(
     'use strict';
     rendererList.push(
       {
-        type: 'payso_card',
-        component: 'PaySolutions_CraditCard/js/view/payment/method-renderer/payso-card'
+        type: 'payso_alipay',
+        component: 'PaySolutions_Alipay/js/view/payment/method-renderer/payso-alipay'
       }
     );
     return Component.extend({});

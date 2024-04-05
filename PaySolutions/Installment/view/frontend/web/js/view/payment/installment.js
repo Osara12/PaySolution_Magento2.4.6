@@ -8,7 +8,7 @@ define(
     'use strict';
     rendererList.push(
       {
-        type: 'custompayment',
+        type: 'payso_installment',
         component: 'PaySolutions_OfflinePayments/js/view/payment/method-renderer/installment-method'
       }
     );

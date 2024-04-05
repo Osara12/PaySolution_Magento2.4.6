@@ -8,8 +8,8 @@ define(
     'use strict';
     rendererList.push(
       {
-        type: 'payso_card',
-        component: 'PaySolutions_CraditCard/js/view/payment/method-renderer/payso-card'
+        type: 'payso_wechat',
+        component: 'PaySolutions_WeChat/js/view/payment/method-renderer/payso-wechat'
       }
     );
     return Component.extend({});

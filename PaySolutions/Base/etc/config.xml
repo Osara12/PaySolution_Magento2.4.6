@@ -19,11 +19,12 @@
                 <admin>
                     <report_only>1</report_only>
                 </admin>
-            </mode>
+            </mode> 
         </csp>
         <payment>
             <payso_payment>
                 <model>PaySolutions\Base\Model\Payment\PaysoPayment</model>
+                <order_status>pending</order_status>
                 <group>offline</group>
             </payso_payment>
             <!-- payment-config -->

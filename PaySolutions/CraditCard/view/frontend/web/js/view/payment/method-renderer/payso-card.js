@@ -14,7 +14,9 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
             afterPlaceOrder: function () {
-                setPaymentMethodAction(this.messageContainer);
+                url.setBaseUrl(BASE_URL);
+                var link = url.build('shopeepay/jumpapp/request');
+                $.mage.redirect(link); //redirect to Request page after place order
                 return false;
             },
         });

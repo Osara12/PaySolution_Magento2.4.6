@@ -77,13 +77,14 @@ class Request extends \Magento\Framework\App\Action\Action
         $refno = $orderId;
         $amount = (int)$order->getGrandTotal()*100; //(int) 1234.56 Bath
         $product = $order->getAllItems();
+        print_r($product);
 
         //Signature Hash(sha256)
         $bodyEx = '{
                     "merchantid":"'.$merchantId.'",
                     "refno":"'.$refno.'",
                     "customeremail":"'.$customerEmail.'",
-                    "productdetail":"'.$product.'",
+                    "productdetail":"null",
                     "total":'.$amount.',
                     "lang":"TH",
                     "cc":"00",

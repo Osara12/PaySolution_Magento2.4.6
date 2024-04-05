@@ -91,7 +91,7 @@ class Request extends \Magento\Framework\App\Action\Action
                     "returnurl":"'.$returnUrl.'",
                     "postbackurl":"'.$postbackUrl.'"
                 }';
-        echo $bodyEx;
+        print_r($bodyEx);
         die();
 
         $hash = hash_hmac('sha256', $bodyEx, $secretKey, true);

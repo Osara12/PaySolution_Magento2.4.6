@@ -9,6 +9,7 @@ class Request extends \Magento\Framework\App\Action\Action
 {
 
     protected $resultPageFactory;
+    protected $_product;
 
     /**
     * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -33,15 +34,20 @@ class Request extends \Magento\Framework\App\Action\Action
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Framework\Message\ManagerInterface $messageManager,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        \Magento\Catalog\Model\ProductFactory $product,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        array $data = []
     ) {
         $this->resultPageFactory = $resultPageFactory;
+        
         $this->scopeConfig = $scopeConfig;
         $this->_urlInterface = $urlInterface;
+        $this->_product = $product;
         $this->_checkoutSession = $checkoutSession;
         $this->messageManager = $messageManager;
         parent::__construct($context);
     }
+
 
     /**
      * Execute view action
@@ -56,7 +62,7 @@ class Request extends \Magento\Framework\App\Action\Action
         $redirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
 
         // Mode
-        echo "Payso Test Mode";
+        echo "Payso Test Mode<br>";
 
         //$shopeeUrl = 'https://api.uat.wallet.airpay.co.th/v3/merchant-host/order/create'; //sandbox url
 
@@ -77,7 +83,13 @@ class Request extends \Magento\Framework\App\Action\Action
         $refno = $orderId;
         $amount = (int)$order->getGrandTotal()*100; //(int) 1234.56 Bath
         $product = $order->getAllItems();
-        print_r($product);
+        foreach ($product as $item) {
+            $itemNo = $item->getId();
+            $productId = $item->getProductId();
+            $productName = $this->getProduct($productId)->getName();
+            echo "Item".$itemNo." ".$productName;       
+            echo "<br>";
+         }
 
         //Signature Hash(sha256)
         $bodyEx = '{
@@ -135,6 +147,11 @@ class Request extends \Magento\Framework\App\Action\Action
 
         $redirect->setUrl($redirectUrl);
         return $redirect;
+    }
+
+    public function getProduct($id)
+    {
+        return $this->_product->create()->load($id);
     }
 }
 

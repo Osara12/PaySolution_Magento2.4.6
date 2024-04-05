@@ -23,6 +23,7 @@
                         </field>
                         <field id="min_order_total" translate="label" type="text" sortOrder="56" showInDefault="1" showInWebsite="1" showInStore="0">
                             <label>Minimum Order Total</label>
+                            <comment>** All ibanking - minimum value is 15 THB. If the value is less than 15 THB ibanking’s is not processed. </comment>
                             <validate>validate-number validate-zero-or-greater</validate>
                             <config_path>payment/payso_ibanking/min_order_total</config_path>
                         </field>

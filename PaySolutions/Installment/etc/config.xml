@@ -26,7 +26,7 @@
                 <model>PaySolutions\Installment\Model\Payment\PaysoPayment</model>
                 <active>1</active> 
                 <title>Installment</title>
-                <min_order_total>0</min_order_total>
+                <min_order_total>3000</min_order_total>
                 <sort_order>20</sort_order>
                 <group>offline</group>
             </payso_installment>

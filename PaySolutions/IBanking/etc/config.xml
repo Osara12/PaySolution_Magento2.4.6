@@ -26,7 +26,7 @@
                 <model>PaySolutions\IBanking\Model\Payment\PaysoPayment</model>
                 <active>1</active> 
                 <title>Internet Banking</title>
-                <min_order_total>0</min_order_total>
+                <min_order_total>15</min_order_total>
                 <sort_order>80</sort_order>
                 <group>offline</group>
             </payso_ibanking>

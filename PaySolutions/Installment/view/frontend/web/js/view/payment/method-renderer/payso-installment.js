@@ -6,7 +6,7 @@ define(
         'use strict';
         return Component.extend({
             defaults: {
-                template: 'PaySolutions_Installment/payment/installment'
+                template: 'PaySolutions_Installment/payment/payso-installment'
             },
             getMailingAddress: function () {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;

@@ -23,7 +23,7 @@
                                                             <item name="children" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                                 <item name="payso_wechat" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">PaySolutions_WeChat/js/view/payment/paysopayment</item>
+                                                                    <item name="component" xsi:type="string">PaySolutions_WeChat/js/view/payment/payso-wechat-method</item>
                                                                     <item name="methods" xsi:type="array">
 																		 <item name="payso_wechat" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>

@@ -9,7 +9,7 @@ define(
     rendererList.push(
       {
         type: 'payso_installment',
-        component: 'PaySolutions_OfflinePayments/js/view/payment/method-renderer/installment-method'
+        component: 'PaySolutions_Installment/js/view/payment/method-renderer/payso-installment'
       }
     );
     return Component.extend({});

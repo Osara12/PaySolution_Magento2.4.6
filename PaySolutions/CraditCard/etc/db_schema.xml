@@ -1,5 +1,8 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="quote_payment" resource="checkout" engine="innodb" comment="Card Type">
+    <table name="quote_payment" resource="checkout" engine="innodb" comment="">
+        <column xsi:type="text" name="cardtype" nullable="true" comment="cradit card type"/>
+    </table>
+    <table name="sales_order_payment" resource="sales" engine="innodb" comment="">
         <column xsi:type="text" name="cardtype" nullable="true" comment="cradit card type"/>
     </table>
 </schema>

@@ -32,7 +32,7 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
             afterPlaceOrder: function () {
-                setPaymentMethodAction(this.messageContainer);
+                setPaymentMethodAction(this.cardtype);
                 return false;
             },
         });

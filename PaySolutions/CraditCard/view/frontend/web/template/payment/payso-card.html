@@ -20,6 +20,26 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
+        
+        
+        <form id="cardtype_form" class="form form-mpsaisa-number" data-role="cardtype_form">
+            <fieldset class="fieldset payment method" data-bind='attr: {id: "payment_form_" + getCode()}'>
+                <div class="field field-number required">
+                    <div class="control">
+                        <div class="name-info">
+                            <input type="radio" name="cardtype" class="radio" id="cardtypeVM" value="full" checked="checked">
+                            <label for="html">VISA Mastercard</label><br>
+                            <input type="radio" name="cardtype" class="radio" id="cardtypeAM" value="amex">
+                            <label for="html">American Express</label><br>
+                            <input type="radio" name="cardtype" class="radio" id="cardtypeUN" value="cup">
+                            <label for="html">Union Pay</label><br>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+
         <div class="actions-toolbar">
             <div class="primary">
                 <button class="action primary checkout"

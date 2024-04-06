@@ -22,6 +22,8 @@ class Request extends \Magento\Framework\App\Action\Action
 
     protected $messageManager;
 
+    protected $request;
+
     /**
      * Constructor
      *
@@ -35,6 +37,7 @@ class Request extends \Magento\Framework\App\Action\Action
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Framework\Message\ManagerInterface $messageManager,
         \Magento\Catalog\Model\ProductFactory $product,
+        \Magento\Framework\App\Request\Http $request,
         \Magento\Framework\View\Result\PageFactory $resultPageFactory,
         array $data = []
     ) {
@@ -43,6 +46,7 @@ class Request extends \Magento\Framework\App\Action\Action
         $this->scopeConfig = $scopeConfig;
         $this->_urlInterface = $urlInterface;
         $this->_product = $product;
+        $this->request = $request;
         $this->_checkoutSession = $checkoutSession;
         $this->messageManager = $messageManager;
         parent::__construct($context);
@@ -62,7 +66,9 @@ class Request extends \Magento\Framework\App\Action\Action
         $redirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
 
         // Mode
-        echo "Payso Test Mode<br>";
+        echo "Pay Solution Request<br>";
+        $cardtype = $this->request->getParam('cardtype');
+        echo $cardtype;
 
         //$shopeeUrl = 'https://api.uat.wallet.airpay.co.th/v3/merchant-host/order/create'; //sandbox url
 

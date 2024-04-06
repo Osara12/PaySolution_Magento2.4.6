@@ -32,7 +32,8 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
             afterPlaceOrder: function () {
-                setPaymentMethodAction(this.cardtype);
+                console.log($('input[name="cardtype"]:checked').val())
+                setPaymentMethodAction($('input[name="cardtype"]:checked').val());
                 return false;
             },
         });

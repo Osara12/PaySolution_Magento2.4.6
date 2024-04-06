@@ -1,10 +1,11 @@
 define(
     [
+        'jquery',
         'Magento_Checkout/js/view/payment/default',
         'Magento_Checkout/js/model/quote',
         'PaySolutions_CraditCard/js/action/set-payment-method-action'
     ],
-    function (Component, quote, setPaymentMethodAction) {
+    function ($, Component, quote, setPaymentMethodAction) {
         'use strict';
         return Component.extend({
             defaults: {

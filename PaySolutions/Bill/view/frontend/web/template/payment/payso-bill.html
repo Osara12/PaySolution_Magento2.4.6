@@ -5,7 +5,7 @@
                class="radio"
                data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
         <label data-bind="attr: {'for': getCode()}" class="label">
-            <img style="height: 50px;" data-bind="attr: { src: require.toUrl('PaySolutions_Bill/images/bill.png') }" />
+            <img style="height: 50px; padding-right:10px" data-bind="attr: { src: require.toUrl('PaySolutions_Bill/images/bill.png') }" />
             <span data-bind="text: getTitle()"></span>
         </label>
     </div>

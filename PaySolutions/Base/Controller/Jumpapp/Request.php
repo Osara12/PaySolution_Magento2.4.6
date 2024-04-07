@@ -124,7 +124,7 @@ class Request extends \Magento\Framework\App\Action\Action
         }elseif ($paymentMethod == "payso_truewallet") {
             $channel = "truewallet";
         }elseif ($paymentMethod == "payso_ibanking") {
-            $bankGetParam = $this->request->getParam('ibank'); // Get selected bank type from url
+            $bankGetParam = $this->request->getParam('banktype'); // Get selected bank type from url
             if($bankGetParam == null){
                 $channel = "ibanking";
             }else{
@@ -173,9 +173,9 @@ class Request extends \Magento\Framework\App\Action\Action
             echo '<br> Channel:';
             echo '<input type="text" name="channel" value="'.$channel.'">';
             echo '<br> Return Url:';
-            echo '<input type="text" name="returnurl" value="'.$returnUrl.'">';
+            //echo '<input type="text" name="returnurl" value="'.$returnUrl.'">';
             echo '<br> Postback Url:';
-            echo '<input type="text" name="postbackurl" value="'.$postbackUrl.'">';
+            //echo '<input type="text" name="postbackurl" value="'.$postbackUrl.'">';
             echo '<br>';
             echo '<br>';
             echo '<br>';

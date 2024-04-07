@@ -83,35 +83,8 @@ class ReturnUrl extends \Magento\Framework\App\Action\Action {
     public function execute()
     {
     
-        $invoiceSet = $this->_scopeConfig->getValue('payment/kbankonlinepaymentqr/auto_invoice', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        
-        if( $invoiceSet == '1' ){
-        
-		$orderId = $this->getRealOrderId().'<br>';
-       		$order = $this->_orderRepository->get($orderId);
-        	if($order->canInvoice()) {
-            		$invoice = $this->_invoiceService->prepareInvoice($order);
-            		$invoice->register();
-            		$invoice->save();
-            		$transactionSave = $this->_transaction->addObject(
-                		$invoice
-            		)->addObject(
-                		$invoice->getOrder()
-            		);
-            		$transactionSave->save();
-            		$this->invoiceSender->send($invoice);
-            		//send notification code
-            		$order->addStatusHistoryComment(
-               			__('Notified customer about invoice #%1.', $invoice->getId())
-            		)
-            		->setIsCustomerNotified(true)
-            		->save();
-        	}
-        }
-        $resultRedirect = $this->resultRedirectFactory->create();
-        //$resultRedirect->setPath('payso/payment/success');
-        $resultRedirect->setPath('checkout/onepage/success');
-        return $resultRedirect;
+        echo "success";
+        return;
         
     }
     

@@ -20,6 +20,39 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
+
+        <form id="cardtype_form" class="form form-mpsaisa-number" data-role="cardtype_form">
+            <fieldset class="fieldset payment method" data-bind='attr: {id: "payment_form_" + getCode()}'>
+                <div class="field field-number required">
+                    <div class="control">
+                        <div class="name-info">
+                            <input type="radio" name="banktype" class="radio" id="ibanking_kbank" value="ibanking_kbank" checked="checked">
+                            <img for="ibanking_kbank" data-bind="attr: { src: require.toUrl('images/ibanking_kbank.png') }" />
+                            <input type="radio" name="banktype" class="radio" id="ibanking_scb" value="ibanking_scb" checked="checked">
+                            <img for="ibanking_scb" data-bind="attr: { src: require.toUrl('images/ibanking_scb.png') }" />
+                            <input type="radio" name="banktype" class="radio" id="ibanking_ktb" value="ibanking_ktb" checked="checked">
+                            <img for="ibanking_ktb" data-bind="attr: { src: require.toUrl('images/ibanking_ktb.png') }" />
+                            <input type="radio" name="banktype" class="radio" id="ibanking_bay" value="ibanking_bay" checked="checked">
+                            <img for="ibanking_bay" data-bind="attr: { src: require.toUrl('images/ibanking_bay.png') }" />
+                            <input type="radio" name="banktype" class="radio" id="ibanking_bbl" value="ibanking_bbl" checked="checked">
+                            <img for="ibanking_bbl" data-bind="attr: { src: require.toUrl('images/ibanking_bbl.png') }" />
+                            <input type="radio" name="banktype" class="radio" id="ibanking_ttb" value="ibanking_ttb" checked="checked">
+                            <img for="ibanking_ttb" data-bind="attr: { src: require.toUrl('images/ibanking_ttb.png') }" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+        <!--
+            ibanking	Not select specific internet banking
+            ibanking_kbank	Internet Banking - Kasikorn Bank
+            ibanking_scb	Internet Banking - SCB Bank
+            ibanking_ktb	Internet Banking - Krungthai Bank
+            ibanking_bay	Internet Banking - Krungsri Bank
+            ibanking_bbl	Internet Banking - Bangkok Bank
+            ibanking_ttb	Internet Banking - TTB Bank
+        -->
+
         <div class="actions-toolbar">
             <div class="primary">
                 <button class="action primary checkout"

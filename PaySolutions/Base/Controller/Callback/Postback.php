@@ -14,6 +14,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
     protected $_scopeConfig;
     protected $_pageFactory;
     protected $orderManagement;
+    private $urlInterface;
 
     protected $_invoiceService;
     protected $_orderRepository; 
@@ -26,8 +27,10 @@ class Postback extends \Magento\Framework\App\Action\Action {
 
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
+        
         \Magento\Sales\Model\OrderFactory $orderFactory,
         \Magento\Framework\App\Action\Context $context,
+        \Magento\Framework\UrlInterface $urlInterface,
         \Magento\Framework\DB\TransactionFactory $transactionFactory,
         \Magento\Sales\Api\OrderManagementInterface $orderManagement,
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
@@ -41,6 +44,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
     ) {
         $this->_checkoutSession = $checkoutSession;
         $this->_orderFactory = $orderFactory;
+        $this->urlInterface = $urlInterface;
         $this->_pageFactory = $pageFactory;
         $this->_orderInterface = $orderInterface;
         $this->_cartRepositoryInterface = $cartRepositoryInterface;
@@ -121,7 +125,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
         $params = $this->request->getParams();
         echo '<pre>';
         print_r($params);
-        $this->lineNotify('Page loaded '.print_r($params));
+        $this->lineNotify('Page loaded: '.$this->urlInterface->getCurrentUrl());
         echo '<br><br>';
 
         /*---STATUS MEANING

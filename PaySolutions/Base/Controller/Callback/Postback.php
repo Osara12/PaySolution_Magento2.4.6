@@ -103,7 +103,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
             "Authorization: Bearer 52aYqBDOHN7HmzdiEb6fED0D1adi4420QFr8iIXIT27",
         );
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        $data = "message=error:".$msg;
+        $data = "message=".$msg;
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
         //for debug only!
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);

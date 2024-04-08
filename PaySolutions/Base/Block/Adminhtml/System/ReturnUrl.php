@@ -32,7 +32,8 @@ class ReturnUrl extends FormField
     {
         $elementId = explode('_', $element->getHtmlId());
         $baseUrl = $this->objStoreManagerInterface->getStore()->getBaseUrl();
-        $webUrl = $baseUrl . 'paysopayment/callback/returnurl ';
+        //$webUrl = $baseUrl . 'paysopayment/callback/returnurl ';
+        $webUrl = $baseUrl . 'checkout/onepage/success';
         
         $html = '<input style="opacity:1;" readonly id="' . $element->getHtmlId() . '" class="input-text admin__control-text" value="' . $webUrl . '" onclick="this.select()" type="text">';
 

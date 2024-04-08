@@ -1,0 +1,8 @@
+UPDATE core_config_data SET value = 'http://7862-49-237-21-239.ngrok-free.app' WHERE path LIKE 'web/unsecure/base_url';
+UPDATE core_config_data SET value = 'https://7862-49-237-21-239.ngrok-free.app' WHERE path LIKE 'web/secure/base_url';
+
+../../bin/magento setup:store-config:set --base-url="http://7862-49-237-21-239.ngrok-free.app/"
+../../bin/magento setup:store-config:set --base-url-secure="https://7862-49-237-21-239.ngrok-free.app/"
+
+Line Notify
+52aYqBDOHN7HmzdiEb6fED0D1adi4420QFr8iIXIT27

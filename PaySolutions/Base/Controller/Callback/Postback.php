@@ -92,14 +92,36 @@ class Postback extends \Magento\Framework\App\Action\Action {
         return false;
 
     }
-    
+    public function lineNotify($msg){
+        $url = "https://notify-api.line.me/api/notify";
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $headers = array(
+            "Content-Type: application/x-www-form-urlencoded",
+            "Authorization: Bearer 52aYqBDOHN7HmzdiEb6fED0D1adi4420QFr8iIXIT27",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $data = "message=error:".$msg;
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        //for debug only!
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $resp = curl_exec($curl);
+        curl_close($curl);
+
+        return false;
+    }
     public function execute()
     {
+
     
         echo "Test Postback<br><br>";
         $params = $this->request->getParams();
         echo '<pre>';
         print_r($params);
+        $this->lineNotify('Page loaded '.print_r($params));
         echo '<br><br>';
 
         /*---STATUS MEANING
@@ -171,16 +193,19 @@ class Postback extends \Magento\Framework\App\Action\Action {
                 //----- Check order invoice
                 if(!$order->canInvoice()) {
                     echo 'This order '.$refno.' does not allow an invoice to be created.';
+                    $this->lineNotify('This order '.$refno.' does not allow an invoice to be created.');
                     exit();
                 }
                 //----- Start Create invoice
                 $invoice = $this->_invoiceService->prepareInvoice($order);
                 if (!$invoice) {
                     echo 'Order '.$refno.' cannot save the invoice right now.';
+                    $this->lineNotify('Order '.$refno.' cannot save the invoice right now.');
                     exit();
                 }
                 if (!$invoice->getTotalQty()) {
                     echo 'ShopeePay paid order '.$refno.' cannot create invoice without product.';
+                    $this->lineNotify('ShopeePay paid order '.$refno.' cannot create invoice without product.');
                     exit();
                 }
                 $invoice->setRequestedCaptureCase(\Magento\Sales\Model\Order\Invoice::CAPTURE_OFFLINE);
@@ -191,6 +216,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
                 $transactionSave = $this->_transactionFactory->create()->addObject($invoice)->addObject($invoice->getOrder());
                 $transactionSave->save();
                 echo "Created Invoice.<br>";
+                $this->lineNotify('order '.$refno.' invoice created');
 
                 // send invoice emails, If you want to stop mail disable below try/catch code
                 try {
@@ -201,6 +227,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
                 }
             } catch (\Exception $e) {
                 echo $e;
+                $this->lineNotify($e);
                 exit();
             }
 
@@ -214,6 +241,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
             exit();
         }*/
         else {
+            $this->lineNotify("else?");
             exit();
         }
     } 

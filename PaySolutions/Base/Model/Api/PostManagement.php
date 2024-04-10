@@ -1,38 +1,30 @@
 <?php
 
-namespace PaySolutions\Base\Model\Api;
+namespace PaySolutions\Base\Model;
 
-use Psr\Log\LoggerInterface;
-use PaySolutions\Base\Api\PostManagementInterface;
+use PaySolutions\Base\Api\TestInterface;
+use PaySolutions\Base\ResourceModel\Post\CollectionFactory;
 
-class PostManagement implements PostManagementInterface
-{
-    protected $logger;
-
-    public function __construct(
-        LoggerInterface $logger
-    )
+class Test implements TestInterface
     {
-        $this->logger = $logger;
-    }
+        private $CollectionFactory;
+        public function __construct(
+            CollectionFactory $CollectionFactory
+        )
+        {
+            $this->CollectionFactory = $CollectionFactory;
+        }
 
     /**
-     * @inheritdoc
-     */
-
-    public function getPost($value)
+    * {@inheritdoc}
+    */
+    public function setData($data)
     {
-         $response = ['success' => false];
+        $name = $data['name'];
+        $number = $data['number'];
+        $city = $data['city'];
 
-        try {
-        // Your Code here
 
-            $response = ['success' => true, 'message' => $value];
-        } catch (\Exception $e) {
-            $response = ['success' => false, 'message' => $e->getMessage()];
-            $this->logger->info($e->getMessage());
-        }
-        $returnArray = json_encode($response);
-        return $returnArray;
+        return "successfully saved";
     }
 }

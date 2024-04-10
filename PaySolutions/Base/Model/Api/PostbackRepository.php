@@ -11,7 +11,8 @@ class PostbackRepository implements PostbackInterface
 
     protected $logger;
     protected $request;
-    ]
+
+    
     public function __construct(
         LoggerInterface $logger,
         \Magento\Framework\Webapi\Rest\Request $request

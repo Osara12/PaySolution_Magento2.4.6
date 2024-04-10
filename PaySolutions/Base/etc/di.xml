@@ -1,4 +1,7 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="PaySolutions\Base\Api\PostManagementInterface" type="PaySolutions\Base\Model\Api\PostManagement"/>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="PaySolutions\Base\Api\PostbackInterface" type="PaySolutions\Base\Model\Api\PostbackRepository"/>
+
+
 </config>

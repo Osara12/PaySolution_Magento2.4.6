@@ -3,8 +3,9 @@
 namespace PaySolutions\Base\Model\Api;
 
 use Psr\Log\LoggerInterface;
+use PaySolutions\Base\Api\PostManagementInterface;
 
-class PostManagement
+class PostManagement implements PostManagementInterface
 {
     protected $logger;
 

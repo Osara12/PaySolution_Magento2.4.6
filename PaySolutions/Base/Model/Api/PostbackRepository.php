@@ -10,28 +10,24 @@ class PostbackRepository implements PostbackInterface
 {
 
     protected $logger;
+    protected $request;
+    ]
     public function __construct(
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        \Magento\Framework\Webapi\Rest\Request $request
     )
     {
         $this->logger = $logger;
+        $this->request = $request;
+
     }
     /**
      * @inheritdoc
      */
     public function getPost()
     {
-        $response = ['success' => false];
-        try {
-            
-            $value = "test";
-
-            $response = ['success' => true, 'message' => $value];
-        } catch (\Exception $e) {
-            $response = ['success' => false, 'message' => $e->getMessage()];
-            $this->logger->info($e->getMessage());
-        }
-        $returnArray = json_encode($response);
-        return $returnArray; 
+        // It will return all params which will pass from body of postman.
+        $bodyParams = $this->request->getBodyParams(); 
+        return $bodyParams;
    }
 }

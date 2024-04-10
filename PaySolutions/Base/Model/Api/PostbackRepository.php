@@ -23,7 +23,9 @@ class PostbackRepository implements PostbackInterface
     {
         $response = ['success' => false];
         try {
-            // Your Code here
+            
+            $value = "test";
+
             $response = ['success' => true, 'message' => $value];
         } catch (\Exception $e) {
             $response = ['success' => false, 'message' => $e->getMessage()];

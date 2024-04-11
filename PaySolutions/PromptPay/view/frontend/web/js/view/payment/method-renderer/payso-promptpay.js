@@ -1,11 +1,13 @@
 define(
     [
-        'Magento_Checkout/js/view/payment/default'
+        'Magento_Checkout/js/view/payment/default',
+        'mage/url'
     ],
-    function (Component) {
+    function (Component, url) {
         'use strict';
         return Component.extend({
             defaults: {
+                redirectAfterPlaceOrder: false,
                 template: 'PaySolutions_PromptPay/payment/payso-promptpay'
             },
             getMailingAddress: function () {

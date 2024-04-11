@@ -122,19 +122,27 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
     public function execute()
     {
 
-        $data_raw = file_get_contents("php://input");
-        $bodyParams = json_decode($data_raw);
-        //$params = $this->request->getParams();
-        $refno = $bodyParams['refno'];
-        $orderno = $bodyParams['orderno'];
-        $total = $bodyParams['total'];
-        $status = $bodyParams['status'];
-        $statusname = $bodyParams['statusname'];
+        $post = $this->getRequest()->getPostValue();
 
+        $refno = $post['refno'];
+        //$orderno = $post['orderno'];
+        $total = $post['total'];
+        $status = $post['status'];
+        
         if($refno == null){
-            return "fail to get param 'refno'";
+            echo "fail to get param 'refno'";
             die();
         }
+        if($total == null){
+            echo "fail to get param 'total'";
+            die();
+        }
+        if($status == null){
+            echo "fail to get param 'status'";
+            die();
+        }
+
+
 
 
         $order = $this->_orderInterface->loadByIncrementId($refno);
@@ -142,13 +150,13 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
 
         //----- Check payment status
         if ($status != "CP"){
-            $order->addStatusHistoryComment("Payment Fail status: ".$status.": ".$statusname, false);
-            return "Payment Fail status: ".$status.": ".$statusname;
+            $order->addStatusHistoryComment("Payment Fail status: ".$status, false);
+            echo "Payment Fail status: ".$status;
             exit();
         }
         //----- Check if order exits
         if ( !(isset($orderdata["status"]))){
-            return "Order ".$refno." not found in Magento.";
+            echo "Order ".$refno." not found in Magento.";
             exit();
         }
         $order_status = $orderdata["status"];
@@ -156,7 +164,7 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
         //----- Check payment amount
         if ( $total != $orderAmount){
             $order->addStatusHistoryComment("Error!!! Payment amount missmatch. PaySolutions: ".$total."Thb | Magento: ".$orderAmount."Thb", false);
-            return "Payment amount missmatch. PaySolutions: ".$total."Thb | Magento: ".$orderAmount."Thb";
+            echo "Payment amount missmatch. PaySolutions: ".$total."Thb | Magento: ".$orderAmount."Thb";
             exit();
         }
 
@@ -183,7 +191,7 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
                 $invoice = $this->_invoiceService->prepareInvoice($order);
                 if (!$invoice) {
                     $order->addStatusHistoryComment('Error!!! Order '.$refno.' cannot save the invoice right now.');
-                    return 'Error!!! Order '.$refno.' cannot save the invoice right now.';
+                    echo 'Error!!! Order '.$refno.' cannot save the invoice right now.';
                     exit();
                 }
 
@@ -202,10 +210,10 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
                     //$this->messageManager->addError(__('We can\'t send the invoice email right now.'));
                     $order->addStatusHistoryComment('Failed to send invoice email to customer.', false);
                 }
-                return "success";
+                echo "success";
                 die();
             } catch (\Exception $e) {
-                return $e;
+                echo $e;
                 exit();
             }
 
@@ -219,7 +227,7 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
             exit();
         }*/
         else {
-            return "fail";
+            echo "Order ".$refno." is not pending.";
             exit();
         }
     } 

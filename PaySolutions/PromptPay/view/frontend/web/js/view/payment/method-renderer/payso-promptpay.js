@@ -1,9 +1,8 @@
 define(
     [
-        'Magento_Checkout/js/view/payment/default',
-        'PaySolutions_PromptPay/js/action/set-payment-method-action'
+        'Magento_Checkout/js/view/payment/default'
     ],
-    function (Component, setPaymentMethodAction) {
+    function (Component) {
         'use strict';
         return Component.extend({
             defaults: {
@@ -13,7 +12,9 @@ define(
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
             afterPlaceOrder: function () {
-                setPaymentMethodAction();
+                url.setBaseUrl(BASE_URL);
+                var link = url.build('paysopayment/jumpapp/request');
+                $.mage.redirect(link);
                 return false;
             },
         });

@@ -1,8 +1,10 @@
 define(
     [
-        'Magento_Checkout/js/view/payment/default'
+        'Magento_Checkout/js/view/payment/default',
+        'PaySolutions_Bill/js/action/set-payment-method-action'
+
     ],
-    function (Component) {
+    function (Component, setPaymentMethodAction) {
         'use strict';
         return Component.extend({
             defaults: {
@@ -11,6 +13,10 @@ define(
             getMailingAddress: function () {
                 return window.checkoutConfig.payment.checkmo.mailingAddress;
             },
+            afterPlaceOrder: function () {
+                setPaymentMethodAction();
+                return false;
+            },
         });
     }
-);
+);  

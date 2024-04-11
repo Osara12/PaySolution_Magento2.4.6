@@ -52,7 +52,7 @@ class PostbackRepository implements PostbackInterface
     {
         // It will return all params which will pass from body of postman.
         $bodyParams = $this->request->getBodyParams(); 
-        $this->lineNotify('Page loaded: '.$bodyParams);
+        $this->lineNotify(json_encode($bodyParams));
         return $bodyParams;
    }
 }

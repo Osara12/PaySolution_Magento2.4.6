@@ -227,7 +227,7 @@ class Postback extends \Magento\Framework\App\Action\Action implements CsrfAware
             exit();
         }*/
         else {
-            echo "Order ".$refno." is not pending.";
+            echo "Order ".$refno." status is not pending.";
             exit();
         }
     } 

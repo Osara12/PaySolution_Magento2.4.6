@@ -7,7 +7,9 @@ use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 
-class Postback extends \Magento\Framework\App\Action\Action {
+
+class Postback extends \Magento\Framework\App\Action\Action implements CsrfAwareActionInterface 
+{
 
     protected $_checkoutSession;
     protected $_orderFactory;
@@ -120,66 +122,43 @@ class Postback extends \Magento\Framework\App\Action\Action {
     public function execute()
     {
 
-    
-        echo "Test Postback<br><br>";
-        $params = $this->request->getParams();
-        echo '<pre>';
-        print_r($params);
-        $this->lineNotify('Page loaded: '.$this->urlInterface->getCurrentUrl());
-        echo '<br><br>';
+        $data_raw = file_get_contents("php://input");
+        $bodyParams = json_decode($data_raw);
+        //$params = $this->request->getParams();
+        $refno = $bodyParams['refno'];
+        $orderno = $bodyParams['orderno'];
+        $total = $bodyParams['total'];
+        $status = $bodyParams['status'];
+        $statusname = $bodyParams['statusname'];
 
-        /*---STATUS MEANING
-            CP	Completed  รายการสั่งซื้อ "อนุมัติ"
-            Y	Completed  รายการสั่งซื้อ "อนุมัติ"
-            NS	Not Submit  ลูกค้าของคุณยังไม่ได้กรอกข้อมูลบัตรเครดิต
-            N	Not Submit  ลูกค้าของคุณยังไม่ได้ชำระเงิน
-            RE	Rejected  รายการสั่งซื้อ "ไม่อนุมัติ"
-            RF	Refund  รายการที่ "คืนเงิน" เรียบร้อย
-            RR	Request Refund  รายการที่ทำเรื่องขอ "คืนเงิน"
-            TC	Test Complete  รายการทดสอบที่ "อนุมัติ" (ใช้บัตรทดสอบทำรายการ ไม่ใช่การชำระเงินจริง)
-            VC	VBV Checking  รายการที่อยู่ในระหว่าง "ตรวจสอบ VBV"
-            VO	Voided  รายการที่ "คืนเงิน" เรียบร้อย
-            VR	VBV Rejected  รายการสั่งซื้อ "ไม่อนุมัติ" เนื่องจากกรอกรหัส VBV ไม่ผ่าน
-            N	UnPaid  ลูกค้าไม่ชำระเงิน
-            C	Cancel  รายการสั่งซื้อถูกยกเลิก
-            HO	Hold  รายการสั่งซื้อถูก "ยึดหน่วง" ยอดการชำระเงินเอาไว้ เนื่องจากรายการสั่งซื้อดังกล่าวอาจมีปัญหาจากการถูกปฏิเสธการชำระเงินได้ในภายหลัง(โปรดอ่านคำแนะนำในอีเมลที่แจ้งเปลี่ยนสถานะเป็น HOLD)
-            PF	Payment Failed  รายการสั่งซื้อไม่สำเร็จ  (เกิดเฉพาะรายการ Internet Banking)
-        */
-
-        $status = $this->request->getParam('status');
-        $statusname = $this->request->getParam('statusname');
-        $refno = $this->request->getParam('refno');
-        $amount = $this->request->getParam('total');
-
-        echo $status.'<br>';
-        echo $refno.'<br>';
-        echo $amount.'<br>';
-        echo '<br><br>';
-
-        //----- Check payment status
-        if ($status != "CP"){
-            echo "Payment Fail || status: ".$status." ".$statusname;
-            exit();
+        if($refno == null){
+            return "fail to get param 'refno'";
+            die();
         }
-        echo "Payment status: Payment Success<br>";
+
 
         $order = $this->_orderInterface->loadByIncrementId($refno);
         $orderdata  = $order->getData();
+
+        //----- Check payment status
+        if ($status != "CP"){
+            $order->addStatusHistoryComment("Payment Fail status: ".$status.": ".$statusname, false);
+            return "Payment Fail status: ".$status.": ".$statusname;
+            exit();
+        }
         //----- Check if order exits
         if ( !(isset($orderdata["status"]))){
-            echo "Order ".$refno." not found.";
+            return "Order ".$refno." not found in Magento.";
             exit();
         }
         $order_status = $orderdata["status"];
         $orderAmount = $orderdata["grand_total"];
-        echo "Order status: ".$orderdata["status"]."<br>";
         //----- Check payment amount
-        /*
-        if ( $amount != $orderAmount){
-            echo "Payment amount missmatch.";
+        if ( $total != $orderAmount){
+            $order->addStatusHistoryComment("Error!!! Payment amount missmatch. PaySolutions: ".$total."Thb | Magento: ".$orderAmount."Thb", false);
+            return "Payment amount missmatch. PaySolutions: ".$total."Thb | Magento: ".$orderAmount."Thb";
             exit();
         }
-        */
 
         //----- Prepare Invoice
         if( $order_status == "pending" ){         
@@ -196,31 +175,25 @@ class Postback extends \Magento\Framework\App\Action\Action {
             try {
                 //----- Check order invoice
                 if(!$order->canInvoice()) {
-                    echo 'This order '.$refno.' does not allow an invoice to be created.';
-                    $this->lineNotify('This order '.$refno.' does not allow an invoice to be created.');
+                    $order->addStatusHistoryComment('Error!!! This order '.$refno.' does not allow an invoice to be created.');
+                    echo 'Error!!! This order '.$refno.' does not allow an invoice to be created.';
                     exit();
                 }
                 //----- Start Create invoice
                 $invoice = $this->_invoiceService->prepareInvoice($order);
                 if (!$invoice) {
-                    echo 'Order '.$refno.' cannot save the invoice right now.';
-                    $this->lineNotify('Order '.$refno.' cannot save the invoice right now.');
+                    $order->addStatusHistoryComment('Error!!! Order '.$refno.' cannot save the invoice right now.');
+                    return 'Error!!! Order '.$refno.' cannot save the invoice right now.';
                     exit();
                 }
-                if (!$invoice->getTotalQty()) {
-                    echo 'ShopeePay paid order '.$refno.' cannot create invoice without product.';
-                    $this->lineNotify('ShopeePay paid order '.$refno.' cannot create invoice without product.');
-                    exit();
-                }
+
                 $invoice->setRequestedCaptureCase(\Magento\Sales\Model\Order\Invoice::CAPTURE_OFFLINE);
                 $invoice->register();
                 $invoice->getOrder()->setCustomerNoteNotify(false);
                 $invoice->getOrder()->setIsInProcess(true);
-                $order->addStatusHistoryComment('ออก Invoice อัตโนมัติจากการชำระเงินด้วย PaySolutions', false);
+                $order->addStatusHistoryComment('ออก Invoice อัตโนมัติจากการชำระเงินด้วย PaySolutions ยอดเงิน '.$total." Thb", false);
                 $transactionSave = $this->_transactionFactory->create()->addObject($invoice)->addObject($invoice->getOrder());
                 $transactionSave->save();
-                echo "Created Invoice.<br>";
-                $this->lineNotify('order '.$refno.' invoice created');
 
                 // send invoice emails, If you want to stop mail disable below try/catch code
                 try {
@@ -229,9 +202,10 @@ class Postback extends \Magento\Framework\App\Action\Action {
                     //$this->messageManager->addError(__('We can\'t send the invoice email right now.'));
                     $order->addStatusHistoryComment('Failed to send invoice email to customer.', false);
                 }
+                return "success";
+                die();
             } catch (\Exception $e) {
-                echo $e;
-                $this->lineNotify($e);
+                return $e;
                 exit();
             }
 
@@ -245,7 +219,7 @@ class Postback extends \Magento\Framework\App\Action\Action {
             exit();
         }*/
         else {
-            $this->lineNotify("else?");
+            return "fail";
             exit();
         }
     } 

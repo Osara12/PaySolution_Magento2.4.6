@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <default>
+        <payment>
+            <payso_payment>
+                <payment_action>capture</payment_action> <!-- You can use another methor like capture  -->
+                <model>PaySolutions\PsPayments\Model\PaymentMethod</model>
+                <active>0</active> 
+                <title>Paysolutions Payment Gateway</title>
+                <order_status>pending</order_status>
+                <mode>1</mode>
+                <lang>TH</lang>
+            </payso_payment>
+        </payment>
+    </default>
+</config>

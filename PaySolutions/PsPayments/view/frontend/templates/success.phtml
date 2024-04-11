@@ -1,0 +1,38 @@
+<?php
+
+$objCustomerDetail 	= $this->getCustomerDetail();
+$strCurrencyCode 	= $this->getBaseCurrencyCode();
+
+$home_url 				= $block->getUrl();
+$order_id 				= $this->getOrderId();
+
+$objCustomerOrderDetail  = $this->getOrderDetails($order_id);
+$floatGrandTotal = $objCustomerOrderDetail->getGrandTotal();
+$floatGrandTotal = round($floatGrandTotal, 2);
+$floatGrandTotal = number_format($floatGrandTotal, 2, '.', ',');
+$strCustomerName = '';
+
+if($objCustomerDetail->isLoggedIn()) {
+	$strCustomerName = $objCustomerDetail->getCustomer()->getName();	
+} else {
+	$strCustomerName = 'Guest';
+}
+
+$id = $objCustomerOrderDetail->getId();
+
+?>
+<div class="col-main text-center">
+	<div class="page-title"><h2> <?php echo __('Your order has been received') .'  '. __($strCustomerName) . __('.') ?> </h2></div>
+	<h3 class="sub-title"> <?php echo __('Thank you for your purchase!') ?> </h3> 
+
+	<p><?php echo __('Your order ID is') ?>: <a href="<?php echo $home_url;?>sales/order/view/order_id/<?php echo $id;?>"><?php echo $order_id;?></a> </p>
+	<p><?php echo __('Your Purchase Amount is')?>: <b><?php echo $floatGrandTotal;?>&nbsp;<?php echo __($strCurrencyCode) ?></b> </p>	
+
+	<p> <?php echo __('You will receive an order confirmation email with details of your order and a link to track its progress.') ?> </p>
+
+	<p><?php echo __('Click'); ?> <a href="<?php echo $home_url;?>sales/order/print/order_id/<?php echo $id;?>" onclick="this.target='_blank'"><?php echo __('here to print') ?></a> <?php echo __('a copy of your order confirmation') ?>. </p>
+
+	<div class="primary">
+		<button type="button" class="action primary continue btn btn-primary" title="<?php echo __('Continue Shopping') ?>" onclick="window.location='<?php echo $home_url;?>'"><span><?php echo __('Continue Shopping') ?></span></button>
+	</div>
+</div>

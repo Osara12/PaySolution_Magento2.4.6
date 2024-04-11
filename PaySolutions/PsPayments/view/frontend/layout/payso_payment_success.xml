@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="PaySolutions\PsPayments\Block\Form" name="payso_success" template="PaySolutions_PsPayments::success.phtml" />
+	    <block class="Magento\Checkout\Block\Registration" name="checkout.registration" template="Magento_Checkout::registration.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

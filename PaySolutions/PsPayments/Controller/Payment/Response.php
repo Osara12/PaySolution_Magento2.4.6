@@ -11,7 +11,7 @@ class Response extends Action {
 
 	protected $_logger;
 	protected $_orderFactory;
-	protected $_objCheckoutHelper;
+	protected $_objCheckoutHelper; 
 	protected $_configSettings;
     protected $_orderRepository;
     protected $_invoiceService;
@@ -51,6 +51,27 @@ class Response extends Action {
 		$this->_transactionBuilder 	= $transactionBuilder;
 	}
 
+	public function lineNotify($msg){
+        $url = "https://notify-api.line.me/api/notify";
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $headers = array(
+            "Content-Type: application/x-www-form-urlencoded",
+            "Authorization: Bearer 52aYqBDOHN7HmzdiEb6fED0D1adi4420QFr8iIXIT27",
+        );
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $data = "message=".$msg;
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+        //for debug only!
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $resp = curl_exec($curl);
+        curl_close($curl);
+
+        return false;
+    }
 
 	public function execute() { 
 		$this->_logger->info('DATA_RESPONSE', ['value' => $_REQUEST]);
@@ -87,6 +108,9 @@ class Response extends Action {
 
 				$payment_id = $payment->getId();
 				$orderId	= $order->getId();
+
+				$this->lineNotify($orderId);
+				echo "Order: ".$orderId."  ";
 
 				// $this->_logger->info('DATA_ID', ['paymentId' => $payment_id, 'orderId' => $orderId]);
 
@@ -127,7 +151,10 @@ class Response extends Action {
 						$order->addStatusHistoryComment(
 							__('Notified customer about invoice #%1.', $invoice->getId())
 						)->setIsCustomerNotified(true)->save();
+						$this->lineNotify("Created Invoice");
+						echo "Created Invoice";
 					}
+					
 				} 
 				else {
 					$order->save();
@@ -141,6 +168,8 @@ class Response extends Action {
 			}
 			catch(Exception $e) {
 				$this->_logger->info('EXCEPTION', ['value' => $e->getMessage()]);
+				$this->lineNotify(json_encode($e));
+				echo $e;
 			}
 
 			return;

@@ -6,3 +6,5 @@ UPDATE core_config_data SET value = 'https://7862-49-237-21-239.ngrok-free.app' 
 
 Line Notify
 52aYqBDOHN7HmzdiEb6fED0D1adi4420QFr8iIXIT27
+
+ngrok http --domain=kind-spider-complete.ngrok-free.app 80   --response-header-add='content-security-policy: self'   --response-header-add='dial-duration: ${.backend.dial_duration}'   --response-header-remove='internal-trace-id'policy: self'   --response-header-add='dial-duration: ${.backend.dial_duration}'   --response-header-remove='internal-

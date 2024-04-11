@@ -9,7 +9,7 @@ define(
         return Component.extend({
             defaults: {
                 redirectAfterPlaceOrder: false,
-                template: 'PaySolutions_PromptPay/payment/payso-alipay'
+                template: 'PaySolutions_PromptPay/payment/payso-promptpay'
             },
         getMailingAddress: function () {
             return window.checkoutConfig.payment.checkmo.mailingAddress;

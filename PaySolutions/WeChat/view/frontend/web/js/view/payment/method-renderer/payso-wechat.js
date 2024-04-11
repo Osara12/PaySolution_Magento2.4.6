@@ -1,9 +1,10 @@
 define(
     [
         'Magento_Checkout/js/view/payment/default',
-        'mage/url'
+        'mage/url',
+        'jquery',
     ],
-    function (Component, url) {
+    function (Component, url, $) {
         'use strict';
         return Component.extend({
             defaults: {

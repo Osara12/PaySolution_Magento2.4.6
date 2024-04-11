@@ -66,13 +66,11 @@ class Request extends \Magento\Framework\App\Action\Action
         $redirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
 
         // Mode
-        echo "Pay Solution Request<br>";
+        echo "<center>Preparing...</center>";
         $paysoUrl = 'https://payment.paysolutions.asia/epaylink/payment.aspx';
         $merchantId = $this->scopeConfig->getValue('payment/payso_payment/merchant_id', $storeScope);
         $returnUrl = $baseWebsiteUrl."paysopayment/callback/postback/";
         $postbackUrl = $baseWebsiteUrl."paysopayment/callback/returnurl/";
-
-        echo $paysoUrl.'<br><br>';
 
         //Order Details
         $order = $this->_checkoutSession->getLastRealOrder();
@@ -99,7 +97,6 @@ class Request extends \Magento\Framework\App\Action\Action
             $productFlag = 1;
             
         }
-        echo "<br>";
 
         //----Get Payment and change to Payso payment channel code----
         $paymentMethod = $order->getPayment()->getMethod(); 
@@ -133,7 +130,6 @@ class Request extends \Magento\Framework\App\Action\Action
         }else{
             $channel = "";
         }
-        echo $channel."<br>";
 
         // Request data
         $bodyEx = '{
@@ -148,39 +144,39 @@ class Request extends \Magento\Framework\App\Action\Action
                     "returnurl":"'.$returnUrl.'",
                     "postbackurl":"'.$postbackUrl.'"
                 }';
-        print_r($bodyEx);
-        echo "<br><br><br>";
 
         //---- Create Form data and redirect
-        echo '<form method="post" action="https://payment.paysolutions.asia/epaylink/payment.aspx"><br>';
-            echo 'Customer E-mail:';
-            echo '<input type="text" name="customeremail" value="'.$customerEmail.'">';
-            echo '<br> Product Detail:';
-            echo '<input type="text" name="productdetail" value="'.$orderProduct.'">';
+        echo '<form method="post" id="requestForm" action="https://payment.paysolutions.asia/epaylink/payment.aspx"><br>';
+            //echo 'Customer E-mail:';
+            echo '<input type="hidden" name="customeremail" value="'.$customerEmail.'">';
+            //echo '<br> Product Detail:';
+            echo '<input type="hidden" name="productdetail" value="'.$orderProduct.'">';
             echo '<br>';
-            echo 'Reference No.:';
-            echo '<input type="text" name="refno" value="'.$refno.'">';
+            //echo 'Reference No.:';
+            echo '<input type="hidden" name="refno" value="'.$refno.'">';
             echo '<br>';
-            echo 'Merchant ID:';
-            echo '<input type="text" name="merchantid" value="'.$merchantId.'">';
+            //echo 'Merchant ID:';
+            echo '<input type="hidden" name="merchantid" value="'.$merchantId.'">';
             echo '<br>';
-            echo 'Currency Code:';
-            echo '<input type="text" name="cc" value="00">';
-            echo '<br> Total:';
-            echo '<input type="text" name="total" value="'.$amount.'">';
-            echo '<br> Lang:';
-            echo '<input type="text" name="lang" value="TH">';
-            echo '<br> Channel:';
-            echo '<input type="text" name="channel" value="'.$channel.'">';
-            echo '<br> Return Url:';
-            //echo '<input type="text" name="returnurl" value="'.$returnUrl.'">';
-            echo '<br> Postback Url:';
-            //echo '<input type="text" name="postbackurl" value="'.$postbackUrl.'">';
-            echo '<br>';
-            echo '<br>';
-            echo '<br>';
-            echo '<input type="submit" name="Submit" value="Comfirm Order">';
+            //echo 'Currency Code:';
+            echo '<input type="hidden" name="cc" value="00">';
+            //echo '<br> Total:';
+            echo '<input type="hidden" name="total" value="'.$amount.'">';
+            //echo '<br> Lang:';
+            echo '<input type="hidden" name="lang" value="TH">';
+            //echo '<br> Channel:';
+            echo '<input type="hidden" name="channel" value="'.$channel.'">';
+            //echo '<br> Return Url:';
+            //echo '<input type="hidden" name="returnurl" value="'.$returnUrl.'">';
+            //echo '<br> Postback Url:';
+            //echo '<input type="hidden" name="postbackurl" value="'.$postbackUrl.'">';
+
+            //echo '<input type="submit" name="Submit" value="Comfirm Order">';
         echo '</form>';
+
+        echo '<script type="text/javascript">document.getElementById("requestForm").submit();</script>';
+        
+
 
 
         return;

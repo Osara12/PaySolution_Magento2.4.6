@@ -1,24 +1,25 @@
 define(
     [
-        'jquery',
         'Magento_Checkout/js/view/payment/default',
-        'Magento_Checkout/js/model/quote',
-        'PaySolutions_PromptPay/js/action/set-payment-method-action'
+        'mage/url',
+        'jquery',
     ],
-    function ($, Component, quote, setPaymentMethodAction) {
+    function (Component, url, $) {
         'use strict';
         return Component.extend({
             defaults: {
                 redirectAfterPlaceOrder: false,
-                template: 'PaySolutions_PromptPay/payment/payso-card',
+                template: 'PaySolutions_PromptPay/payment/payso-alipay'
             },
-            getMailingAddress: function () {
-                return window.checkoutConfig.payment.checkmo.mailingAddress;
-            },
-            afterPlaceOrder: function () {
-                setPaymentMethodAction();
-                return false; 
-            },
-        });
-    }
+        getMailingAddress: function () {
+            return window.checkoutConfig.payment.checkmo.mailingAddress;
+        },
+        afterPlaceOrder: function () {
+            url.setBaseUrl(BASE_URL);
+            var link = url.build('paysopayment/jumpapp/request');
+            $.mage.redirect(link);
+            return false;
+        },
+    });
+}
 );
